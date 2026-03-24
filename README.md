@@ -22,6 +22,7 @@
      │  / Desktop   │          │  (this thing)    │          │  ◆ PRs       │
      │              │◄─────────┤                  │◄─────────┤  ◆ testing   │
      │              │ response │                  │ standard │  ◆ rails     │
+     │              │          │                  │          │  ◆ frontend  │
      │              │          │                  │          │  ◆ staff     │
      └──────────────┘          └──────────────────┘          └──────────────┘
       YOU + AI                  Protocol Layer                 Standards DB
@@ -33,7 +34,7 @@
 
 | Tool | Description |
 |------|-------------|
-| `get_standard` | Retrieve a specific engineering standard (`git`, `code_review`, `pr`, `staff_engineer`, `testing`, `rails`) |
+| `get_standard` | Retrieve a specific engineering standard (`git`, `code_review`, `pr`, `staff_engineer`, `testing`, `rails`, `frontend`) |
 | `review_branch_name` | Check if a branch name follows conventions |
 | `review_commit_message` | Check if a commit message follows conventions |
 | `staff_engineer_review` | Get the staff engineer thinking checklist for a given phase of work |
@@ -57,6 +58,12 @@
 |----------|--------|
 | **Rails Standards** | Architecture, security, performance, migrations, Hotwire, deployment |
 | **Testing Philosophy** | Rails/RSpec strategy, FactoryBot, system specs, N+1 detection, CI integration |
+
+### Frontend
+
+| Standard | Covers |
+|----------|--------|
+| **Frontend Standards** | TypeScript, components, accessibility, state management, performance, testing, security |
 
 ---
 
@@ -119,7 +126,8 @@ src/standards/
 ├── pr-standards.md              ← PR size, checklists
 ├── staff-engineer-checklist.md  ← thinking prompts
 ├── testing-philosophy.md        ← test strategy (Rails/RSpec)
-└── rails-standards.md           ← Rails conventions + rails-expert agent
+├── rails-standards.md           ← Rails conventions + rails-expert agent
+└── frontend-standards.md        ← Frontend conventions + frontend-developer agent
 ```
 
 ```bash

@@ -18,6 +18,7 @@ const STANDARDS: Record<string, string> = {
   staff_engineer: "staff-engineer-checklist.md",
   testing: "testing-philosophy.md",
   rails: "rails-standards.md",
+  frontend: "frontend-standards.md",
 };
 
 export function registerStandardsTools(server: McpServer): void {
@@ -26,10 +27,10 @@ export function registerStandardsTools(server: McpServer): void {
     {
       title: "Get Engineering Standard",
       description:
-        "Retrieve a specific engineering standard. Available standards: git, code_review, pr, staff_engineer, testing, rails",
+        "Retrieve a specific engineering standard. Available standards: git, code_review, pr, staff_engineer, testing, rails, frontend",
       inputSchema: {
         standard: z
-          .enum(["git", "code_review", "pr", "staff_engineer", "testing", "rails"])
+          .enum(["git", "code_review", "pr", "staff_engineer", "testing", "rails", "frontend"])
           .describe("The standard to retrieve"),
       },
     },
