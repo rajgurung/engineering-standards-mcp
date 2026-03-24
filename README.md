@@ -13,6 +13,8 @@
 
 > *Good engineering habits shouldn't live in your head — they should be encoded, shareable, and enforceable.*
 
+---
+
 ```
      ┌──────────────┐          ┌──────────────────┐          ┌──────────────┐
      │              │  query   │                  │  read    │  ◆ git       │
@@ -25,41 +27,57 @@
       YOU + AI                  Protocol Layer                 Standards DB
 ```
 
+---
+
 ## 🛠️ Tools
 
-- 📖 **`get_standard`** — Retrieve a specific engineering standard (git, code_review, pr, staff_engineer, testing, rails)
-- 🔍 **`review_branch_name`** — Check if a branch name follows conventions
-- ✍️ **`review_commit_message`** — Check if a commit message follows conventions
-- 🧠 **`staff_engineer_review`** — Get the staff engineer thinking checklist for a given phase of work
+| Tool | Description |
+|------|-------------|
+| `get_standard` | Retrieve a specific engineering standard (`git`, `code_review`, `pr`, `staff_engineer`, `testing`, `rails`) |
+| `review_branch_name` | Check if a branch name follows conventions |
+| `review_commit_message` | Check if a commit message follows conventions |
+| `staff_engineer_review` | Get the staff engineer thinking checklist for a given phase of work |
+
+---
 
 ## 📚 Standards Included
 
 ### General
 
-- **Git Conventions** — branch naming, commits, rebase workflow, commit hygiene
-- **Code Review** — tone, structure, what to look for, giving and receiving feedback
-- **PR Standards** — size, description, pre-merge checklist, hotfix protocol
-- **Staff Engineer Checklist** — thinking prompts for each phase of work
+| Standard | Covers |
+|----------|--------|
+| **Git Conventions** | Branch naming, commits, rebase workflow, commit hygiene |
+| **Code Review** | Tone, structure, what to look for, giving and receiving feedback |
+| **PR Standards** | Size, description, pre-merge checklist, hotfix protocol |
+| **Staff Engineer Checklist** | Thinking prompts for each phase of work |
 
 ### Rails
 
-- **Rails Standards** — architecture, security, performance, migrations, Hotwire, deployment
-- **Testing Philosophy** — Rails/RSpec testing strategy, FactoryBot, system specs, N+1 detection, CI integration
+| Standard | Covers |
+|----------|--------|
+| **Rails Standards** | Architecture, security, performance, migrations, Hotwire, deployment |
+| **Testing Philosophy** | Rails/RSpec strategy, FactoryBot, system specs, N+1 detection, CI integration |
+
+---
 
 ## 🤖 Companion Agents
 
-These standards are designed to work alongside specialized Claude Code subagents from [awesome-claude-code-subagents](https://github.com/rajgurung/awesome-claude-code-subagents). The MCP provides the *what* (your team's standards), the agents provide the *how* (code generation and implementation).
+The MCP provides the *what* (your team's standards). These agents provide the *how* (code generation and implementation).
 
-| Agent | Role | Link |
-|-------|------|------|
-| **rails-expert** | Rails 7.x/8.x implementation, version-aware patterns, Hotwire, deployment | [rails-expert.md](https://github.com/rajgurung/awesome-claude-code-subagents/blob/main/categories/02-language-specialists/rails-expert.md) |
-| **frontend-developer** | React, Vue, Angular — TypeScript, accessibility, component architecture | [frontend-developer.md](https://github.com/rajgurung/awesome-claude-code-subagents/blob/main/categories/01-core-development/frontend-developer.md) |
+From [awesome-claude-code-subagents](https://github.com/rajgurung/awesome-claude-code-subagents):
+
+| Agent | Role |
+|-------|------|
+| [**rails-expert**](https://github.com/rajgurung/awesome-claude-code-subagents/blob/main/categories/02-language-specialists/rails-expert.md) | Rails 7.x/8.x implementation, version-aware patterns, Hotwire, deployment |
+| [**frontend-developer**](https://github.com/rajgurung/awesome-claude-code-subagents/blob/main/categories/01-core-development/frontend-developer.md) | React, Vue, Angular — TypeScript, accessibility, component architecture |
 
 > When the MCP returns a standard, it includes a reference to the relevant agent. Claude Code can then delegate implementation to that agent automatically.
 
+---
+
 ## ⚙️ Setup
 
-### Install
+### 1. Install
 
 ```bash
 git clone https://github.com/yourusername/engineering-standards-mcp.git
@@ -68,24 +86,14 @@ npm install
 npm run build
 ```
 
-### Register with Claude Code
+### 2. Register
 
-Add to your Claude Code MCP settings (`~/.claude/.mcp.json` or project-level):
+Add to your MCP settings file:
 
-```json
-{
-  "mcpServers": {
-    "engineering-standards": {
-      "command": "node",
-      "args": ["/absolute/path/to/engineering-standards-mcp/build/index.js"]
-    }
-  }
-}
-```
-
-### Register with Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+| Client | Config file |
+|--------|-------------|
+| Claude Code | `~/.claude/.mcp.json` (or project-level) |
+| Claude Desktop | `~/Library/Application Support/Claude/claude_desktop_config.json` |
 
 ```json
 {
@@ -97,6 +105,8 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   }
 }
 ```
+
+---
 
 ## 🎨 Customising
 
@@ -116,6 +126,8 @@ src/standards/
 npm run build
 ```
 
+---
+
 ## 🧑‍💻 Development
 
 ```bash
@@ -123,6 +135,8 @@ npm run dev    # Watch mode — recompiles on change
 npm run build  # One-off build
 npm start      # Run the server
 ```
+
+---
 
 ## 📄 License
 
