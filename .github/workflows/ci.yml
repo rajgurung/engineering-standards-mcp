@@ -28,7 +28,7 @@ jobs:
 
       - name: Verify standards files exist
         run: |
-          for file in git-conventions code-review pr-standards staff-engineer-checklist testing-philosophy rails-standards frontend-standards deployment-standards; do
+          for file in git-conventions code-review pr-standards staff-engineer-checklist testing-philosophy rails-standards frontend-standards deployment-standards incident-response observability api-design database-design architecture-decisions technical-debt; do
             if [ ! -s "build/standards/${file}.md" ]; then
               echo "ERROR: build/standards/${file}.md is missing or empty"
               exit 1
