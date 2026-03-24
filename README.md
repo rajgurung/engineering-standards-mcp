@@ -1,36 +1,36 @@
 ```
-███████╗███╗   ██╗ ██████╗    ███████╗████████╗██████╗ ███████╗
-██╔════╝████╗  ██║██╔════╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝
-█████╗  ██╔██╗ ██║██║  ███╗   ███████╗   ██║   ██║  ██║███████╗
-██╔══╝  ██║╚██╗██║██║   ██║   ╚════██║   ██║   ██║  ██║╚════██║
-███████╗██║ ╚████║╚██████╔╝██╗███████║   ██║   ██████╔╝███████║
-╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝
-
-             // Engineering Standards MCP Server //
-
-Your engineering brain, exported as a protocol.
+                ███████╗███╗   ██╗ ██████╗    ███████╗████████╗██████╗ ███████╗
+                ██╔════╝████╗  ██║██╔════╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝
+                █████╗  ██╔██╗ ██║██║  ███╗   ███████╗   ██║   ██║  ██║███████╗
+                ██╔══╝  ██║╚██╗██║██║   ██║   ╚════██║   ██║   ██║  ██║╚════██║
+                ███████╗██║ ╚████║╚██████╔╝██╗███████║   ██║   ██████╔╝███████║
+                ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝
+                
+                             // Engineering Standards MCP Server //
+                
+                          Your engineering brain, exported as a protocol.
 ```
 
 > *Good engineering habits shouldn't live in your head — they should be encoded, shareable, and enforceable.*
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░░ HOW IT WORKS ░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░░░ HOW IT WORKS ░░░░░░░░░░░░░░░░░░░░░░    │
 └─────────────────────────────────────────────────────────────┘
 
      ┌──────────────┐          ┌──────────────────┐          ┌──────────────┐
      │              │  query   │                  │  read    │  ◆ git       │
-     │  Claude Code ├─────────►│  MCP Server      ├─────────►│  ◆ reviews  │
-     │  / Desktop   │          │  (this thing)    │          │  ◆ PRs      │
-     │              │◄─────────┤                  │◄─────────┤  ◆ testing  │
-     │              │ response │                  │ standard │  ◆ staff    │
+     │  Claude Code ├─────────►│  MCP Server      ├─────────►│  ◆ reviews   │
+     │  / Desktop   │          │  (this thing)    │          │  ◆ PRs       │
+     │              │◄─────────┤                  │◄─────────┤  ◆ testing   │
+     │              │ response │                  │ standard │  ◆ staff     │
      └──────────────┘          └──────────────────┘          └──────────────┘
       YOU + AI                  Protocol Layer                 Standards DB
 ```
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░░░░░ TOOLS ░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░░░░░░ TOOLS ░░░░░░░░░░░░░░░░░░░░░░░░░░    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -51,7 +51,7 @@ Your engineering brain, exported as a protocol.
   └────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────┐
-  │  ✍️   review_commit_message                             │
+  │  ✍️   review_commit_message                            │
   │  ──────────────────────────────────────────────────    │
   │  Validates commit messages follow conventions.         │
   │  Checks: imperative mood, subject ≤72 chars,           │
@@ -63,39 +63,39 @@ Your engineering brain, exported as a protocol.
   │  ──────────────────────────────────────────────────    │
   │  Staff engineer thinking checklist for any phase.      │
   │  Phases: before_coding, during_implementation,         │
-  │          before_pr, after_merge, incident               │
+  │          before_pr, after_merge, incident              │
   └────────────────────────────────────────────────────────┘
 ```
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░ STANDARDS DB ░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░░ STANDARDS DB ░░░░░░░░░░░░░░░░░░░░░░░    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ```
   ╔════════════════════╦═══════════════════════════════════════════════════╗
-  ║  Standard          ║  What it covers                                  ║
+  ║  Standard          ║  What it covers                                   ║
   ╠════════════════════╬═══════════════════════════════════════════════════╣
-  ║  Git Conventions   ║  Branch naming, commits, rebase workflow,        ║
-  ║                    ║  commit hygiene                                  ║
+  ║  Git Conventions   ║  Branch naming, commits, rebase workflow,         ║
+  ║                    ║  commit hygiene                                   ║
   ╠════════════════════╬═══════════════════════════════════════════════════╣
-  ║  Code Review       ║  Tone, structure, what to look for, giving       ║
-  ║                    ║  and receiving feedback                          ║
+  ║  Code Review       ║  Tone, structure, what to look for, giving        ║
+  ║                    ║  and receiving feedback                           ║
   ╠════════════════════╬═══════════════════════════════════════════════════╣
-  ║  PR Standards      ║  Size, description, pre-merge checklist,         ║
-  ║                    ║  hotfix protocol                                 ║
+  ║  PR Standards      ║  Size, description, pre-merge checklist,          ║
+  ║                    ║  hotfix protocol                                  ║
   ╠════════════════════╬═══════════════════════════════════════════════════╣
-  ║  Staff Engineer    ║  Thinking prompts for each phase of work         ║
+  ║  Staff Engineer    ║  Thinking prompts for each phase of work          ║
   ╠════════════════════╬═══════════════════════════════════════════════════╣
-  ║  Testing           ║  Behaviour over implementation, real objects     ║
-  ║                    ║  over mocks, flaky test prevention               ║
+  ║  Testing           ║  Behaviour over implementation, real objects      ║
+  ║                    ║  over mocks, flaky test prevention                ║
   ╚════════════════════╩═══════════════════════════════════════════════════╝
 ```
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░░░ SETUP ░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░░░░ SETUP ░░░░░░░░░░░░░░░░░░░░░░░░░░░     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -140,7 +140,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░ CUSTOMISING ░░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░ CUSTOMISING ░░░░░░░░░░░░░░░░░░░░░░░░     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -161,7 +161,7 @@ npm run build
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░ DEVELOPMENT ░░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░ DEVELOPMENT ░░░░░░░░░░░░░░░░░░░░░░░░     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -173,7 +173,7 @@ npm start      # Run the server
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░░ LICENSE ░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+│  ░░░░░░░░░░░░░░░░░░░ LICENSE ░░░░░░░░░░░░░░░░░░░░░░░░░░     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -181,6 +181,6 @@ MIT
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  Built with ♥ and strong opinions about commit messages.    ║
+║  Built with ♥ and strong opinions about commit messages.     ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
