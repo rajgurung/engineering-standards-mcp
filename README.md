@@ -6,7 +6,7 @@
                 ███████╗██║ ╚████║╚██████╔╝██╗███████║   ██║   ██████╔╝███████║
                 ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝
 
-                             // Engineering Standards MCP Server //
+                          ⚡ Engineering Standards MCP Server ⚡
 
                           Your engineering brain, exported as a protocol.
 ```
