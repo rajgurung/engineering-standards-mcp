@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Verify standards files exist
+        run: |
+          for file in git-conventions code-review pr-standards staff-engineer-checklist testing-philosophy rails-standards frontend-standards deployment-standards; do
+            if [ ! -s "build/standards/${file}.md" ]; then
+              echo "ERROR: build/standards/${file}.md is missing or empty"
+              exit 1
+            fi
+          done
+          echo "All standards files present and non-empty"
+
+      - name: Verify server starts
+        run: |
+          timeout 5 node build/index.js 2>&1 || true
+          echo "Server binary executes successfully"

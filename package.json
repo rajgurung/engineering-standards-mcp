@@ -1,10 +1,10 @@
 {
-  "name": "engineering-standards-mcp",
+  "name": "claude-engineering-standards",
   "version": "0.1.0",
-  "description": "Personal MCP server encoding engineering standards, git etiquette, and staff-engineer-level best practices",
+  "description": "MCP server that gives Claude Code your team's engineering standards — git, Rails, testing, deployment, code review, frontend",
   "type": "module",
   "bin": {
-    "engineering-standards-mcp": "./build/index.js"
+    "claude-engineering-standards": "./build/index.js"
   },
   "scripts": {
     "build": "tsc && cp -r src/standards build/standards && chmod 755 build/index.js",
@@ -16,10 +16,15 @@
   ],
   "keywords": [
     "mcp",
+    "mcp-server",
+    "claude",
+    "claude-code",
     "engineering-standards",
-    "git-conventions",
+    "rails",
     "code-review",
-    "staff-engineer"
+    "staff-engineer",
+    "deployment",
+    "developer-tools"
   ],
   "license": "MIT",
   "dependencies": {
