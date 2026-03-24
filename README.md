@@ -1,29 +1,107 @@
-# Engineering Standards MCP Server
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║   ███████╗███╗   ██╗ ██████╗    ███████╗████████╗██████╗ ███████╗          ║
+║   ██╔════╝████╗  ██║██╔════╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝         ║
+║   █████╗  ██╔██╗ ██║██║  ███╗   ███████╗   ██║   ██║  ██║███████╗         ║
+║   ██╔══╝  ██║╚██╗██║██║   ██║   ╚════██║   ██║   ██║  ██║╚════██║         ║
+║   ███████╗██║ ╚████║╚██████╔╝██╗███████║   ██║   ██████╔╝███████║         ║
+║   ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝         ║
+║                                                                            ║
+║            ⚡ Engineering Standards MCP Server ⚡                          ║
+║                                                                            ║
+║   Your engineering brain, exported as a protocol.                          ║
+║                                                                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+```
 
-A personal MCP (Model Context Protocol) server that encodes engineering standards, git etiquette, code review conventions, and staff-engineer-level thinking into tools your AI assistant can call.
+> *Good engineering habits shouldn't live in your head — they should be encoded, shareable, and enforceable.*
 
-## Why?
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░░ HOW IT WORKS ░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
 
-Good engineering habits shouldn't live in your head — they should be encoded, shareable, and enforceable. This MCP server gives your AI assistant access to your engineering standards so it can help you follow them consistently.
+     ┌──────────────┐          ┌──────────────────┐          ┌──────────────┐
+     │              │  query   │                  │  read    │  ◆ git       │
+     │  Claude Code ├─────────►│  MCP Server      ├─────────►│  ◆ reviews  │
+     │  / Desktop   │          │  (this thing)    │          │  ◆ PRs      │
+     │              │◄─────────┤                  │◄─────────┤  ◆ testing  │
+     │              │ response │                  │ standard │  ◆ staff    │
+     └──────────────┘          └──────────────────┘          └──────────────┘
+      YOU + AI                  Protocol Layer                 Standards DB
+```
 
-## Tools
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░░░░░ TOOLS ░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
 
-| Tool | Description |
-|------|-------------|
-| `get_standard` | Retrieve a specific engineering standard (git, code_review, pr, staff_engineer, testing) |
-| `review_branch_name` | Check if a branch name follows conventions |
-| `review_commit_message` | Check if a commit message follows conventions |
-| `staff_engineer_review` | Get the staff engineer thinking checklist for a given phase of work |
+```
+  ┌────────────────────────────────────────────────────────┐
+  │  📖  get_standard                                      │
+  │  ──────────────────────────────────────────────────    │
+  │  Retrieve a specific engineering standard.             │
+  │  Options: git, code_review, pr, staff_engineer,        │
+  │           testing                                      │
+  └────────────────────────────────────────────────────────┘
 
-## Standards Included
+  ┌────────────────────────────────────────────────────────┐
+  │  🔍  review_branch_name                                │
+  │  ──────────────────────────────────────────────────    │
+  │  Validates branch names follow conventions.            │
+  │  Checks: issue ID prefix, kebab-case, length           │
+  └────────────────────────────────────────────────────────┘
 
-- **Git Conventions** — branch naming, commit messages, rebase workflow, commit hygiene
-- **Code Review** — tone, structure, what to look for, giving and receiving feedback
-- **PR Standards** — size, description, pre-merge checklist, hotfix protocol
-- **Staff Engineer Checklist** — thinking prompts for each phase of work
-- **Testing Philosophy** — behaviour over implementation, real objects over mocks, flaky test prevention
+  ┌────────────────────────────────────────────────────────┐
+  │  ✍️   review_commit_message                             │
+  │  ──────────────────────────────────────────────────    │
+  │  Validates commit messages follow conventions.         │
+  │  Checks: imperative mood, subject ≤72 chars,           │
+  │          body structure                                │
+  └────────────────────────────────────────────────────────┘
 
-## Setup
+  ┌────────────────────────────────────────────────────────┐
+  │  🧠  staff_engineer_review                             │
+  │  ──────────────────────────────────────────────────    │
+  │  Staff engineer thinking checklist for any phase.      │
+  │  Phases: before_coding, during_implementation,         │
+  │          before_pr, after_merge, incident               │
+  └────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░ STANDARDS DB ░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+```
+  ╔════════════════════╦═══════════════════════════════════════════════════╗
+  ║  Standard          ║  What it covers                                  ║
+  ╠════════════════════╬═══════════════════════════════════════════════════╣
+  ║  Git Conventions   ║  Branch naming, commits, rebase workflow,        ║
+  ║                    ║  commit hygiene                                  ║
+  ╠════════════════════╬═══════════════════════════════════════════════════╣
+  ║  Code Review       ║  Tone, structure, what to look for, giving       ║
+  ║                    ║  and receiving feedback                          ║
+  ╠════════════════════╬═══════════════════════════════════════════════════╣
+  ║  PR Standards      ║  Size, description, pre-merge checklist,         ║
+  ║                    ║  hotfix protocol                                 ║
+  ╠════════════════════╬═══════════════════════════════════════════════════╣
+  ║  Staff Engineer    ║  Thinking prompts for each phase of work         ║
+  ╠════════════════════╬═══════════════════════════════════════════════════╣
+  ║  Testing           ║  Behaviour over implementation, real objects     ║
+  ║                    ║  over mocks, flaky test prevention               ║
+  ╚════════════════════╩═══════════════════════════════════════════════════╝
+```
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░░░ SETUP ░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ### Install
 
@@ -64,15 +142,32 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
-## Customising
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░ CUSTOMISING ░░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 The standards are plain markdown files in `src/standards/`. Edit them to match your team's conventions, then rebuild:
+
+```
+  src/standards/
+  ├── git-conventions.md        ← branch naming, commits
+  ├── code-review.md            ← review tone & structure
+  ├── pr-standards.md           ← PR size, checklists
+  ├── staff-engineer-checklist.md  ← thinking prompts
+  └── testing-philosophy.md     ← test strategy
+```
 
 ```bash
 npm run build
 ```
 
-## Development
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░ DEVELOPMENT ░░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ```bash
 npm run dev    # Watch mode — recompiles on change
@@ -80,6 +175,16 @@ npm run build  # One-off build
 npm start      # Run the server
 ```
 
-## License
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░░ LICENSE ░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 MIT
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║  Built with ♥ and strong opinions about commit messages.    ║
+╚══════════════════════════════════════════════════════════════╝
+```
