@@ -122,6 +122,37 @@ Add to your MCP settings file:
 
 ---
 
+## 📋 Wiring It Into Your Projects
+
+Once the MCP is registered, add a `CLAUDE.md` to your project root so Claude Code knows to consult it:
+
+```markdown
+## Engineering Standards
+
+This project follows team engineering standards via the engineering-standards MCP server.
+
+### Before writing code
+- Call `get_standard("rails")` for architecture and conventions
+- Call `get_standard("testing")` for test strategy
+- Call `get_standard("deployment")` before any migration or deploy work
+
+### Before committing
+- Call `review_branch_name` to validate your branch name
+- Call `review_commit_message` to validate your commit message
+
+### Before opening a PR
+- Call `staff_engineer_review` with phase `before_pr`
+- Call `get_standard("code_review")` for review expectations
+
+### Implementation
+- Use the rails-expert agent for Rails code generation
+- Use the frontend-developer agent for frontend work
+```
+
+> Adapt this to your stack — remove what doesn't apply, add project-specific rules. The `CLAUDE.md` stays small because the standards live in the MCP, not in every repo.
+
+---
+
 ## 🎨 Customising
 
 The standards are plain markdown files in `src/standards/`. Edit them to match your team's conventions, then rebuild:
