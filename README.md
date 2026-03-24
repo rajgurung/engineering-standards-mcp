@@ -23,6 +23,7 @@
      │              │◄─────────┤                  │◄─────────┤  ◆ testing   │
      │              │ response │                  │ standard │  ◆ rails     │
      │              │          │                  │          │  ◆ frontend  │
+     │              │          │                  │          │  ◆ deploy    │
      │              │          │                  │          │  ◆ staff     │
      └──────────────┘          └──────────────────┘          └──────────────┘
       YOU + AI                  Protocol Layer                 Standards DB
@@ -34,7 +35,7 @@
 
 | Tool | Description |
 |------|-------------|
-| `get_standard` | Retrieve a specific engineering standard (`git`, `code_review`, `pr`, `staff_engineer`, `testing`, `rails`, `frontend`) |
+| `get_standard` | Retrieve a specific engineering standard (`git`, `code_review`, `pr`, `staff_engineer`, `testing`, `rails`, `frontend`, `deployment`) |
 | `review_branch_name` | Check if a branch name follows conventions |
 | `review_commit_message` | Check if a commit message follows conventions |
 | `staff_engineer_review` | Get the staff engineer thinking checklist for a given phase of work |
@@ -64,6 +65,12 @@
 | Standard | Covers |
 |----------|--------|
 | **Frontend Standards** | TypeScript, components, accessibility, state management, performance, testing, security |
+
+### Deployment
+
+| Standard | Covers |
+|----------|--------|
+| **Deployment Standards** | Three-phase migration strategy, strong_migrations, zero-downtime deploys, rollback strategy, pre/post-deploy checklists |
 
 ---
 
@@ -127,7 +134,8 @@ src/standards/
 ├── staff-engineer-checklist.md  ← thinking prompts
 ├── testing-philosophy.md        ← test strategy (Rails/RSpec)
 ├── rails-standards.md           ← Rails conventions + rails-expert agent
-└── frontend-standards.md        ← Frontend conventions + frontend-developer agent
+├── frontend-standards.md        ← Frontend conventions + frontend-developer agent
+└── deployment-standards.md      ← Safe deploys, migrations, rollback strategy
 ```
 
 ```bash
