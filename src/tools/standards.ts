@@ -26,6 +26,7 @@ const STANDARDS: Record<string, string> = {
   database_design: "database-design.md",
   architecture_decisions: "architecture-decisions.md",
   technical_debt: "technical-debt.md",
+  standup: "standup.md",
 };
 
 export function registerStandardsTools(server: McpServer): void {
@@ -34,10 +35,10 @@ export function registerStandardsTools(server: McpServer): void {
     {
       title: "Get Engineering Standard",
       description:
-        "Retrieve a specific engineering standard. Available standards: git, code_review, pr, staff_engineer, testing, rails, frontend, deployment, incident_response, observability, api_design, database_design, architecture_decisions, technical_debt",
+        "Retrieve a specific engineering standard. Available standards: git, code_review, pr, staff_engineer, testing, rails, frontend, deployment, incident_response, observability, api_design, database_design, architecture_decisions, technical_debt, standup",
       inputSchema: {
         standard: z
-          .enum(["git", "code_review", "pr", "staff_engineer", "testing", "rails", "frontend", "deployment", "incident_response", "observability", "api_design", "database_design", "architecture_decisions", "technical_debt"])
+          .enum(["git", "code_review", "pr", "staff_engineer", "testing", "rails", "frontend", "deployment", "incident_response", "observability", "api_design", "database_design", "architecture_decisions", "technical_debt", "standup"])
           .describe("The standard to retrieve"),
       },
     },
