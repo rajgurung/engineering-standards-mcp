@@ -14,12 +14,12 @@
 - First line is the subject — max 72 characters, no trailing period
 - Leave a blank line between subject and body
 - Body explains **why**, not **what** (the diff shows what)
-- Reference the issue tracker ID in the branch, not the commit message (the branch link handles traceability)
+- Append the issue tracker ID in parentheses at the end of the subject when relevant: `Fix nil DOB crash on profile (PROJ-225)`. The branch link covers traceability while the branch exists; the suffix preserves it in `git log` forever — useful for cherry-picking, archaeology, and quick scanning. Skip the suffix on chores not tied to a ticket (typo fixes, lock file updates, etc.).
 
 ### Good Examples
 
 ```
-Fix nil date of birth crash on user profile page
+Fix nil date of birth crash on user profile page (PROJ-225)
 
 The age_check and under_18? methods assumed date_of_birth was always
 present. Some external data sources omit this field, causing a
@@ -27,7 +27,7 @@ NoMethodError on the profile page.
 ```
 
 ```
-Add CI checks for conflict markers and orphaned migrations
+Add CI checks for conflict markers and orphaned migrations (PROJ-307)
 
 Directly motivated by the broken merge incident where unresolved
 conflict markers in structure.sql reached main and blocked all
