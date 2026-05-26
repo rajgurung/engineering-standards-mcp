@@ -51,39 +51,38 @@ No:
 - Bug fixes in a known component
 - Single-file refactors
 
-### Two shapes, pick the right one
+### One canonical diagram, every PR
 
-| The PR touches | Use this shape |
-|---|---|
-| Runtime per-record behaviour (event emission, payload, callback handling, downstream processing) | **Lifecycle diagram** — the sequence of states/events a single record passes through, with the touched stage highlighted. |
-| Control plane (admin UI, configuration tables, kill switches, thresholds, routing rules) | **Admin flow diagram** — a two-zone diagram showing admin → config → data → runtime touchpoint. Highlight the configuration row or admin form that changes. |
+Use the **same diagram on every PR for the project**. One canonical source, one mental model for every reviewer. They learn the shape once, then on every PR just look for the gold marker.
 
-Common mistake: pasting a lifecycle diagram on a control-plane PR and highlighting an event node. The PR doesn't change that event; it changes what feeds into it. The admin-flow shape is more accurate and reviewer-friendly for control-plane work.
+This applies to both runtime per-record PRs (which change behaviour at a specific stage) and control-plane PRs (which configure something that lands at runtime later). For control-plane PRs, identify the lifecycle stage where the change first manifests and gold-highlight that node — then explain the connection in the caption.
+
+Why not a bespoke diagram per change-type (lifecycle vs admin-flow)? Because reviewers should recognise the diagram instantly across the project. Different shapes per PR fragments the mental model. Source-of-truth single diagram beats accurate-but-bespoke diagrams.
 
 ### How to apply
 
-1. Open the PR description with a `## Where this PR sits` heading.
-2. Embed a Mermaid flowchart of the relevant flow (lifecycle or admin). GitHub renders ```mermaid``` code fences natively as SVG.
-3. Mark the touched node with both:
-   - A label suffix like `<br/><b>★ THIS PR ★</b>`
-   - A gold style: `style <NodeId> fill:#ffd700,stroke:#b8860b,stroke-width:3px,color:#000`
-4. For lifecycle shapes, style failure / exclusion branches in muted red (`fill:#f8d7da,stroke:#721c24,color:#000`) so the happy path stands out.
-5. For admin shapes, use `subgraph` blocks to separate control-plane from runtime concerns.
-6. One-line caption under the diagram explaining the relationship between the PR and the highlighted node.
-7. Link to a canonical reference (knowledge-hub or design doc) for the full walkthrough — don't try to fit everything in the PR description.
+1. Open the PR description with a `## Where this PR sits in the pipeline` heading.
+2. Copy the canonical Mermaid diagram verbatim from the project's lifecycle page.
+3. Identify where the PR's effect first manifests on the lifecycle:
+   - Runtime PR (event emission, payload, callback handling) → the event node directly.
+   - Control-plane PR (admin UI, config tables, kill switch, thresholds, routing) → the lifecycle stage where the configuration is read or stamped.
+4. On that node, add `<br/><b>★ THIS PR ★</b>` to the label and a gold style: `style <NodeId> fill:#ffd700,stroke:#b8860b,stroke-width:3px,color:#000`.
+5. Keep the rest of the diagram styling unchanged (e.g. failure paths in pink for consistency with the canonical).
+6. Write a one-or-two line caption under the diagram. For runtime PRs this is direct ("this PR ships the X that emits this event"). For control-plane PRs name the control-plane change and the runtime stage where it manifests ("Adam configures Y in the admin UI; the effect lands at Z").
+7. Link to the canonical lifecycle page for the full walkthrough.
 
 ### Canonical source pattern
 
-For projects with their own lifecycle page, treat the source-of-truth diagram as living in that page (e.g. knowledge-hub `/projects/<name>/lifecycle.md`). The PR description re-embeds the diagram and overlays the "★ THIS PR ★" marker. One canonical reference, per-PR markers.
+Treat the source-of-truth diagram as living in a single project page (e.g. knowledge-hub `/projects/<name>/lifecycle.md`). It carries only the gold colour, no `★ THIS PR ★` label — kept clean as the canonical reference. The "★ THIS PR ★" label lives only in PR descriptions.
 
-Admin-flow diagrams are typically per-PR for now. If a project accumulates many control-plane surfaces with similar shapes, consider adding an admin-flows companion page to the canonical reference.
+When a new PR opens, update the gold-highlight node in the canonical page to track the latest in-flight work. One line change.
 
 ### Example
 
 The Hexarad Mecha AI integration uses this pattern.
-- See `knowledge-hub/docs/projects/mecha-ai/lifecycle.md` for the canonical lifecycle diagram.
-- PR #124 (formatter, runtime) → lifecycle diagram with the event node highlighted.
-- PR #112 (routing config, control plane) → admin flow diagram with the config row highlighted.
+- Canonical: `knowledge-hub/docs/projects/mecha-ai/lifecycle.md`.
+- PR #124 (formatter integration, runtime) → gold on `formatter_completed`.
+- PR #112 (routing config, control plane) → gold on `case_entered_pipeline`. Caption explains that Adam configures routing on a `case_policy_rule`, and the effect lands at `case_entered_pipeline` where the matched routing is stamped onto the outbox.
 
 ## Before Opening
 
