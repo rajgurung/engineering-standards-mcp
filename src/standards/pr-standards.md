@@ -51,38 +51,59 @@ No:
 - Bug fixes in a known component
 - Single-file refactors
 
-### One canonical diagram, every PR
+### Canonical preserved, secondary subgraph when needed
 
-Use the **same diagram on every PR for the project**. One canonical source, one mental model for every reviewer. They learn the shape once, then on every PR just look for the gold marker.
+Every PR opens with the **same canonical diagram** for the project — preserved verbatim for orientation. Reviewers recognise the shape instantly across PRs.
 
-This applies to both runtime per-record PRs (which change behaviour at a specific stage) and control-plane PRs (which configure something that lands at runtime later). For control-plane PRs, identify the lifecycle stage where the change first manifests and gold-highlight that node — then explain the connection in the caption.
+- **Runtime PR** (the change is at a specific lifecycle stage) — canonical only. Gold-highlight the touched stage with a `★ THIS PR ★` label.
+- **Control-plane PR** (the change is configuration that lands at runtime later) — canonical preserved with no `★ THIS PR ★` marker, PLUS a side-by-side secondary subgraph showing what this PR actually changes. A dotted connector arrow links the secondary subgraph node to the lifecycle stage where the change manifests.
 
-Why not a bespoke diagram per change-type (lifecycle vs admin-flow)? Because reviewers should recognise the diagram instantly across the project. Different shapes per PR fragments the mental model. Source-of-truth single diagram beats accurate-but-bespoke diagrams.
+Both cases use a single `flowchart LR` block with subgraphs for layout. The control-plane case shows the canonical and the secondary side by side; the runtime case has only the canonical.
+
+Why not a bespoke diagram for control-plane PRs? Tried it; fragments the mental model. Reviewers should see the canonical lifecycle on every PR and recognise it. Why not gold-highlight a lifecycle node for control-plane PRs? Tried it; misrepresents the change (the PR doesn't change that event, it changes what feeds into it). The canonical-plus-secondary pattern keeps both true.
+
+### Template (control-plane PR)
+
+```mermaid
+flowchart LR
+    subgraph lifecycle["The pipeline (canonical)"]
+        direction TB
+        ... canonical lifecycle nodes from the project's master diagram ...
+    end
+
+    subgraph control["What this PR changes"]
+        direction TB
+        ... the admin action / config row / control-plane change ...
+    end
+
+    SecondaryNode -. how the change connects .-> LifecycleNode
+
+    style SecondaryNode fill:#ffd700,stroke:#b8860b,stroke-width:3px,color:#000
+    style FailurePathA fill:#f8d7da,stroke:#721c24,color:#000
+    style FailurePathB fill:#f8d7da,stroke:#721c24,color:#000
+```
 
 ### How to apply
 
-1. Open the PR description with a `## Where this PR sits in the pipeline` heading.
-2. Copy the canonical Mermaid diagram verbatim from the project's lifecycle page.
-3. Identify where the PR's effect first manifests on the lifecycle:
-   - Runtime PR (event emission, payload, callback handling) → the event node directly.
-   - Control-plane PR (admin UI, config tables, kill switch, thresholds, routing) → the lifecycle stage where the configuration is read or stamped.
-4. On that node, add `<br/><b>★ THIS PR ★</b>` to the label and a gold style: `style <NodeId> fill:#ffd700,stroke:#b8860b,stroke-width:3px,color:#000`.
-5. Keep the rest of the diagram styling unchanged (e.g. failure paths in pink for consistency with the canonical).
-6. Write a one-or-two line caption under the diagram. For runtime PRs this is direct ("this PR ships the X that emits this event"). For control-plane PRs name the control-plane change and the runtime stage where it manifests ("Adam configures Y in the admin UI; the effect lands at Z").
-7. Link to the canonical lifecycle page for the full walkthrough.
+1. Open the PR description with `## Where this PR sits`.
+2. Copy the canonical Mermaid diagram from the project's lifecycle page into a `flowchart LR` block, wrapped in a `subgraph` with `direction TB`.
+3. Decide: runtime PR or control-plane PR.
+4. **Runtime PR:** add gold to the touched event node with a `<br/><b>★ THIS PR ★</b>` label suffix. Stop.
+5. **Control-plane PR:** add a second `subgraph control["What this PR changes"]` with `direction TB`. Model the actual change. Add gold to the row/action that ships, with a `<br/><b>★ THIS PR ★</b>` label suffix. Add a dotted connector arrow from the secondary node to the lifecycle stage where the change manifests, with a label describing the connection.
+6. Keep failure-path styling on the canonical (e.g. pink on exclusion / failure nodes) for consistency.
+7. Caption under the diagram: one or two lines explaining the connection between the PR and the lifecycle.
+8. Link to the canonical lifecycle page for the full walkthrough.
 
 ### Canonical source pattern
 
-Treat the source-of-truth diagram as living in a single project page (e.g. knowledge-hub `/projects/<name>/lifecycle.md`). It carries only the gold colour, no `★ THIS PR ★` label — kept clean as the canonical reference. The "★ THIS PR ★" label lives only in PR descriptions.
-
-When a new PR opens, update the gold-highlight node in the canonical page to track the latest in-flight work. One line change.
+Treat the source-of-truth diagram as living in a single project page (e.g. knowledge-hub `/projects/<name>/lifecycle.md`). It carries only the gold colour, no `★ THIS PR ★` label — kept clean as the canonical reference. The "★ THIS PR ★" label lives only in PR descriptions. The secondary subgraph is per-PR and not in the canonical page.
 
 ### Example
 
 The Hexarad Mecha AI integration uses this pattern.
 - Canonical: `knowledge-hub/docs/projects/mecha-ai/lifecycle.md`.
-- PR #124 (formatter integration, runtime) → gold on `formatter_completed`.
-- PR #112 (routing config, control plane) → gold on `case_entered_pipeline`. Caption explains that Adam configures routing on a `case_policy_rule`, and the effect lands at `case_entered_pipeline` where the matched routing is stamped onto the outbox.
+- PR #124 (formatter integration, runtime) → canonical only. Gold on `formatter_completed`.
+- PR #112 (routing config, control plane) → canonical + secondary subgraph showing Adam → form → `case_policy_rule` with routing fields. Gold on the rule row. Dotted connector from the rule to `case_entered_pipeline` (where `CheckEligibility` reads the routing and the orchestrator stamps the outbox).
 
 ## Before Opening
 
