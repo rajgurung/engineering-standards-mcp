@@ -98,6 +98,23 @@ flowchart LR
 
 Treat the source-of-truth diagram as living in a single project page (e.g. knowledge-hub `/projects/<name>/lifecycle.md`). It carries only the gold colour, no `★ THIS PR ★` label — kept clean as the canonical reference. The "★ THIS PR ★" label lives only in PR descriptions. The secondary subgraph is per-PR and not in the canonical page.
 
+### Mermaid character constraints
+
+GitHub renders Mermaid diagrams via a strict lexer that rejects many non-ASCII characters in edge labels. Symptoms: `Unable to render rich display: Lexical error on line N. Unrecognized text...`
+
+Keep edge labels (between `-.` `.->` or `-->|label|`) to plain ASCII: letters, digits, spaces, and basic punctuation (`,` `.` `-` `/` `:` `(` `)`). Avoid `§`, `→`, `…`, `–`, `°`, `μ`, em-dashes, smart quotes.
+
+Node labels in quoted form (`Node["text"]`) are slightly more permissive but still safer to keep ASCII. Subgraph names are quoted and accept more, but again safer ASCII.
+
+Around the diagram, in the surrounding markdown, any character renders fine — that's the right place for `§5.3`, em-dashes for prose, etc.
+
+Common substitutions inside diagrams:
+
+- `§5.3` → `Section 5.3` or drop it; put the reference in the prose caption
+- `→` → `to` or just use a real arrow `-->`
+- `…` → `...`
+- `–` (en-dash) or `—` (em-dash) → `-` or `:` or split into two labels
+
 ### Example
 
 The Hexarad Mecha AI integration uses this pattern.
